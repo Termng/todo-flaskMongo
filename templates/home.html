@@ -9,13 +9,48 @@
     <title>To do List</title>
 </head>
 <body>
-    <h2>MongoDB Flask Application</h2>
-    <h3>To do Content</h3>\
-    <form action="">
-        <input type="text"><label for="">
+    <h1>MongoDB Flask Application</h1>
+    <form method="post">
+        <p><label for="todoField"> To do Content</label></p>
         
-    </label>
+        <div>
+            <input type="text" id="todoField" name="todoField" placeholder="add to do's here">
+        </div>
+
+        <p><label for="degree">Degree</label></p>
+        <div>
+            <input id="degree0" name="degree" type="radio" value="Unimportant">
+            <label for="degree0">Unimportant</label>
+        </div>
+        <div>
+            <input id="degree1" name="degree" type="radio" value="Important">
+            <label for="degree1"> Important</label>
+        </div>
+        <div>
+            <input id="degree2" name="degree" type="radio" value="Urgent">
+            <label for="degree2">Urgent</label>
+        </div>
+        <div>
+            <input id="degree3" name="degree" type="radio" value="Critical">
+            <label for="degree3">Critical</label>
+        </div>
+
+        <button type="submit"> Submit </button>
     </form>
+
+        {% for todo in todos %}
+            <div>
+                <p>{{ todo['todoField'] }} <i>{{ todo ['degree']}}</i> </p>
+
+
+                <form method="post"
+                action="{{ url_for( 'delete', id = todo['_id'] ) }}">
+                    <input type="submit" value="delete entry" onclick= "return confirm ('are you certain of this action')"">
+                </form>
+            </div>
+
+        {% endfor%}
+        
 
 
 </body>
